@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery selecTable</title>
+    <style>
+    .selecTable {
+        cursor: pointer;
+    }
+
+    .selecTable .selected {
+        background-color: rgb(0, 166, 149);
+        color: rgb(255, 255, 255);
+    }
+
+    .selecTable .selected.cursored {
+        background-color: rgb(131, 202, 189);
+    }
+    </style>
+</head>
+<body>
+    <table id="selectable" tabindex="0">
+        <tbody>
+            <tr>
+                <td>0, 0</td>
+                <td>0, 1</td>
+                <td>0, 2</td>
+            </tr>
+            <tr>
+                <td>1, 0</td>
+                <td>1, 1</td>
+                <td>1, 2</td>
+            </tr>
+            <tr>
+                <td>2, 0</td>
+                <td>2, 1</td>
+                <td>2, 2</td>
+            </tr>
+            <tr>
+                <td>3, 0</td>
+                <td>3, 1</td>
+                <td>3, 2</td>
+            </tr>
+            <tr>
+                <td>4, 0</td>
+                <td>4, 1</td>
+                <td>4, 2</td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="cells-info"></p>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../selectable.min.js"></script>
+    <script>
+    (function ($) {
+      $(function () {
+        $('#selectable').selecTable()
+          .on('selectionupdate', function (e, cells) {
+            var cellsInfoStr = '';
+
+            $(cells).each(function () {
+              cellsInfoStr += $(this).data('cell') + ' ';
+            });
+            $('#cells-info').text(cellsInfoStr);
+          });
+      });
+    })(jQuery);
+    </script>
+</body>
+</html>
