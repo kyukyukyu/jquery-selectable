@@ -29,6 +29,10 @@
   var KEY_SHIFT = 16,
       KEY_LARROW = 37, KEY_UARROW = 38, KEY_RARROW = 39, KEY_DARROW = 40;
 
+  // allowed keycodes for keydown
+  var KEY_ALLOWED_KEYDOWN = [KEY_SHIFT, KEY_LARROW, KEY_UARROW,
+      KEY_RARROW, KEY_DARROW];
+
   // data attribute names
   var DATA_CELL = 'cell';
 
@@ -177,6 +181,19 @@
     var selecTableObj = $(this).data(selecTableAttributeName);
 
     var which = e.which;
+    var isAllowedKey = false;
+
+    $.each(KEY_ALLOWED_KEYDOWN, function (i, keyCode) {
+      if (which === keyCode) {
+        isAllowedKey = true;
+        return false;
+      }
+    });
+
+    if (!isAllowedKey) {
+      return true;
+    }
+
     var $cellB = selecTableObj.$cellB;
     var arrB = $cellB.data(DATA_CELL).split(',');
     var r = parseInt(arrB[0], 10), c = parseInt(arrB[1], 10);
