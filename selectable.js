@@ -67,7 +67,7 @@
     this.selectedCells = [];
   };
 
-  Plugin.prototype.updateSelectedCells = function () {
+  Plugin.prototype.updateSelectedCells = function (e) {
     this.clearSelectedCells();
 
     var $cellA = this.$cellA, $cellB = this.$cellB;
@@ -93,22 +93,34 @@
       colMax = colB;
     }
 
+    var selectedCellsNo = [];
+
     for (var r = rowMin; r <= rowMax; ++r) {
       var $row = $(this.$rows[r]);
       var $cells = $row.find('td');
 
       for (var c = colMin; c <= colMax; ++c) {
-        //this.selectedCells.push(r + ',' + c);
         var cell = $cells[c];
         this.selectedCells.push(cell);
+        selectedCellsNo.push({ row: r, col: c });
 
         $(cell).addClass(CLASS_SELECTED);
       }
     }
 
+    var extraObj = {
+      selectedCells: $.extend([], this.selectedCells),
+      selectedCellsNo: selectedCellsNo,
+      lastSelectedCell: $cellB[0]
+    };
+
+    if (e && e.pageX && e.pageY) {  // when triggered by mouseup
+      extraObj.pageX = e.pageX;
+      extraObj.pageY = e.pageY;
+    }
+
     $(this.element).trigger(
-        'selectionupdate',
-        [$.extend([], this.selectedCells)]);
+        'selectionupdate', extraObj);
   };
 
   var selecTableAttributeName = 'plugin_' + pluginName;
@@ -174,7 +186,7 @@
     var selecTableObj = findSelecTableObjFromCell(this);
     selecTableObj.isMouseDown = false;
     selecTableObj.set$cellB($(e.target));
-    selecTableObj.updateSelectedCells();
+    selecTableObj.updateSelectedCells(e);
   };
 
   Plugin.prototype.keydown = function (e) {

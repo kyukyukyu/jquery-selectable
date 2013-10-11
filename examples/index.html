@@ -55,12 +55,24 @@
     (function ($) {
       $(function () {
         $('#selectable').selecTable()
-          .on('selectionupdate', function (e, cells) {
+          .on('selectionupdate', function (event, extra) {
             var cellsInfoStr = '';
+            var cells = extra.selectedCellsNo;
 
-            $(cells).each(function () {
+            /*$(cells).each(function () {
               cellsInfoStr += $(this).data('cell') + ' ';
+            });*/
+            $(cells).each(function () {
+              cellsInfoStr += this.row + ',' + this.col + ' ';
             });
+
+            cellsInfoStr += $(extra.lastSelectedCell).text() + ' ';
+
+            if (extra.pageX && extra.pageY) {
+              cellsInfoStr += '\n';
+              cellsInfoStr += extra.pageX + ', ' + extra.pageY;
+            }
+
             $('#cells-info').text(cellsInfoStr);
           });
       });
