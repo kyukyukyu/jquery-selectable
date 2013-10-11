@@ -273,11 +273,7 @@
     });
   };
 
-  Plugin.prototype.init = function () {
-    // Place initialization logic here
-    // You already have access to the DOM element and the options via the instance, 
-    // e.g., this.element and this.options
-    
+  Plugin.prototype.update = function () {
     var $elem = $(this.element);
     var $rows = $elem.find('tr');
     var $cells = $elem.find('td');
@@ -298,13 +294,22 @@
     this.selectedCells = [];
 
     $cells
-    .mousedown(this.mousedown)
-    .mouseenter(this.mouseenter)
-    .mouseup(this.mouseup);
+    .off('.selecTable')
+    .on('mousedown.selecTable', this.mousedown)
+    .on('mouseenter.selecTable', this.mouseenter)
+    .on('mouseup.selecTable', this.mouseup);
+  };
+
+  Plugin.prototype.init = function () {
+    // Place initialization logic here
+    // You already have access to the DOM element and the options via the instance, 
+    // e.g., this.element and this.options
+    
+    var $elem = $(this.element);
 
     $elem
-    .keydown(this.keydown)
-    .keyup(this.keyup);
+    .on('keydown.selecTable', this.keydown)
+    .on('keyup.selecTable', this.keyup);
 
     // disable selection
     // original source: http://stackoverflow.com/a/5859238/1407838
@@ -320,13 +325,28 @@
      }).bind('selectstart', function () { return false; });
 
     $elem.addClass(CLASS_SELECTABLE);
+
+    this.update();
   };
 
   // A really lightweight plugin wrapper around the constructor, 
   // preventing against multiple instantiations
-  $.fn[pluginName] = function ( options ) {
+  $.fn[pluginName] = function ( options, command ) {
+    if (typeof options === STR) {
+      command = options;
+      options = undefined;
+    }
+
+    var ret;
+
     return this.each(function () {
-      if (!$.data(this, 'plugin_' + pluginName)) {
+      if ($.data(this, 'plugin_' + pluginName)) {
+        switch (command) {
+        case 'update':
+          $.data(this, 'plugin_' + pluginName).update();
+          break;
+        }
+      } else {
         $.data(this, 'plugin_' + pluginName, new Plugin( this, options ));
       }
     });

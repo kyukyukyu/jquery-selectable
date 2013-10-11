@@ -49,6 +49,10 @@
         </tbody>
     </table>
     <p id="cells-info"></p>
+    <div>
+        <button id="add-row">Add a new row</button>
+        <button id="update">Update selecTable</button>
+    </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="../selectable.min.js"></script>
     <script>
@@ -59,9 +63,6 @@
             var cellsInfoStr = '';
             var cells = extra.selectedCellsNo;
 
-            /*$(cells).each(function () {
-              cellsInfoStr += $(this).data('cell') + ' ';
-            });*/
             $(cells).each(function () {
               cellsInfoStr += this.row + ',' + this.col + ' ';
             });
@@ -75,6 +76,22 @@
 
             $('#cells-info').text(cellsInfoStr);
           });
+
+        $('#add-row').click(function () {
+          var $tbody = $('#selectable').find('tbody');
+          var $row = $('<tr></tr>');
+          var $cell = $('<td>new</td>');
+
+          for (var i = 0; i < 3; ++i) {
+            $row.append($cell.clone());
+          }
+
+          $tbody.append($row);
+        });
+
+        $('#update').click(function () {
+            $('#selectable').selecTable('update');
+        });
       });
     })(jQuery);
     </script>
