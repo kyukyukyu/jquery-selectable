@@ -67,7 +67,9 @@
               cellsInfoStr += this.row + ',' + this.col + ' ';
             });
 
-            cellsInfoStr += $(extra.lastSelectedCell).text() + ' ';
+            if (extra.lastSelectedCell) {
+              cellsInfoStr += $(extra.lastSelectedCell).text() + ' ';
+            }
 
             if (extra.pageX && extra.pageY) {
               cellsInfoStr += '\n';

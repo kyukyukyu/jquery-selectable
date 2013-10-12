@@ -162,6 +162,19 @@
      }).bind('selectstart', userSelectHandler);
   };
 
+  var enableUserSelect = function (elem) {
+    $(elem)
+    .attr('unselectable','')
+    .css({
+      '-moz-user-select': '',
+      '-o-user-select': '',
+      '-khtml-user-select': '',
+      '-webkit-user-select': '',
+      '-ms-user-select': '',
+      'user-select': ''
+     }).unbind('selectstart', userSelectHandler);
+  };
+
   Plugin.prototype.set$cellB = function ($newCellB) {
     this.$cellB.removeClass(CLASS_CURSORED);
     this.$cellB = $newCellB;
@@ -286,12 +299,20 @@
     if (e.which === KEY_SHIFT) {
       selecTableObj.isShiftDown = false;
     }
+
+    enableUserSelect(document);
   };
 
   Plugin.prototype.blur = function (e) {
     var selecTableObj = findSelecTableObjFromElem(this);
 
+    selecTableObj.isMouseDown = false;
+    selecTableObj.$cellA = $();
     selecTableObj.clearSelectedCells();
+    $(selecTableObj.element).trigger('selectionupdate', {
+      selectedCells: [],
+      selectedCellsNo: []
+    });
   };
 
   var setCellDataForTable = function (tableObj) {
