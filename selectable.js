@@ -126,12 +126,16 @@
   var selecTableAttributeName = 'plugin_' + pluginName;
   var selecTableSelector = 'table';
 
+  var findSelecTableObjFromElem = function (element) {
+    return $(element).data(selecTableAttributeName);
+  };
+
   var findSelecTableObjFromCell = function (domObj) {
     var selecTableObj;
 
     $(domObj).parents(selecTableSelector)
     .each(function () {
-      var data = $(this).data(selecTableAttributeName);
+      var data = findSelecTableObjFromElem(this);
 
       if (data) {
         selecTableObj = data;
@@ -140,6 +144,22 @@
     });
 
     return selecTableObj;
+  };
+
+  var userSelectHandler = function () { return false; };
+
+  var disableUserSelect = function (elem) {
+    // original source: http://stackoverflow.com/a/5859238/1407838
+    $(elem)
+    .attr('unselectable','on')
+    .css({
+      '-moz-user-select': 'none',
+      '-o-user-select': 'none',
+      '-khtml-user-select': 'none',
+      '-webkit-user-select': 'none',
+      '-ms-user-select': 'none',
+      'user-select': 'none'
+     }).bind('selectstart', userSelectHandler);
   };
 
   Plugin.prototype.set$cellB = function ($newCellB) {
@@ -162,6 +182,8 @@
     }
 
     selecTableObj.isMouseDown = true;
+
+    disableUserSelect(document);
   };
 
   Plugin.prototype.mouseenter = function (e) {
@@ -187,10 +209,12 @@
     selecTableObj.isMouseDown = false;
     selecTableObj.set$cellB($(e.target));
     selecTableObj.updateSelectedCells(e);
+
+    enableUserSelect(document);
   };
 
   Plugin.prototype.keydown = function (e) {
-    var selecTableObj = $(this).data(selecTableAttributeName);
+    var selecTableObj = findSelecTableObjFromElem(this);
 
     var which = e.which;
     var isAllowedKey = false;
@@ -252,10 +276,12 @@
       selecTableObj.set$cellB($newCellB);
       selecTableObj.updateSelectedCells();
     }
+
+    disableUserSelect(document);
   };
 
   Plugin.prototype.keyup = function (e) {
-    var selecTableObj = $(this).data(selecTableAttributeName);
+    var selecTableObj = findSelecTableObjFromElem(this);
 
     if (e.which === KEY_SHIFT) {
       selecTableObj.isShiftDown = false;
@@ -263,7 +289,8 @@
   };
 
   Plugin.prototype.blur = function (e) {
-    var selecTableObj = $(this).data(selecTableAttributeName);
+    var selecTableObj = findSelecTableObjFromElem(this);
+
     selecTableObj.clearSelectedCells();
   };
 
@@ -317,18 +344,7 @@
     .on('keyup.selecTable', this.keyup)
     .on('blur.selecTable', this.blur);
 
-    // disable selection
-    // original source: http://stackoverflow.com/a/5859238/1407838
-    $elem
-    .attr('unselectable','on')
-    .css({
-      '-moz-user-select': 'none',
-      '-o-user-select': 'none',
-      '-khtml-user-select': 'none', /* you could also put this in a class */
-      '-webkit-user-select': 'none',/* and add the CSS class here instead */
-      '-ms-user-select': 'none',
-      'user-select': 'none'
-     }).bind('selectstart', function () { return false; });
+    disableUserSelect($elem);
 
     $elem.addClass(CLASS_SELECTABLE);
 
