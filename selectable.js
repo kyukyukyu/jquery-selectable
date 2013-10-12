@@ -73,8 +73,8 @@
     var $cellA = this.$cellA, $cellB = this.$cellB;
     var arrA = $cellA.data(DATA_CELL).split(','),
         arrB = $cellB.data(DATA_CELL).split(',');
-    var rowA = +arrA[0], rowB = +arrB[0];
-    var colA = +arrA[1], colB = +arrB[1];
+    var rowA = Number(arrA[0]), rowB = Number(arrB[0]);
+    var colA = Number(arrA[1]), colB = Number(arrB[1]);
     var rowMin, rowMax, colMin, colMax;
 
     if (rowA > rowB) {
@@ -245,7 +245,7 @@
 
     var $cellB = selecTableObj.$cellB;
     var arrB = $cellB.data(DATA_CELL).split(',');
-    var r = +arrB[0], c = +arrB[1];
+    var r = Number(arrB[0]), c = Number(arrB[1]);
     var newR, newC;
 
     if (which === KEY_SHIFT) {
