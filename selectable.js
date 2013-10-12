@@ -262,6 +262,11 @@
     }
   };
 
+  Plugin.prototype.blur = function (e) {
+    var selecTableObj = $(this).data(selecTableAttributeName);
+    selecTableObj.clearSelectedCells();
+  };
+
   var setCellDataForTable = function (tableObj) {
     var $rows = $(tableObj).find('tr');
 
@@ -309,7 +314,8 @@
 
     $elem
     .on('keydown.selecTable', this.keydown)
-    .on('keyup.selecTable', this.keyup);
+    .on('keyup.selecTable', this.keyup)
+    .on('blur.selecTable', this.blur);
 
     // disable selection
     // original source: http://stackoverflow.com/a/5859238/1407838
