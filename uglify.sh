@@ -1,1 +1,1 @@
-uglifyjs selectable.js -c join_vars=true -m -o selecTable.min.js
+uglifyjs selectable.js -c join_vars=true -m -o selectable.min.js
