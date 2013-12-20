@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>jQuery selecTable</title>
     <style>
+    td {
+        border-style : solid;
+        border-width : 1px;
+    }
     .selecTable {
         cursor: pointer;
     }
@@ -64,19 +68,19 @@
             var cells = extra.selectedCellsNo;
 
             $(cells).each(function () {
-              cellsInfoStr += this.row + ',' + this.col + ' ';
+              cellsInfoStr += this.row + ',' + this.col + '</br>';
             });
 
             if (extra.lastSelectedCell) {
-              cellsInfoStr += $(extra.lastSelectedCell).text() + ' ';
+              cellsInfoStr += '</br>Last Selected Cell : ' + $(extra.lastSelectedCell).text().replace(/\s/g,'');
             }
 
             if (extra.pageX && extra.pageY) {
               cellsInfoStr += '\n';
-              cellsInfoStr += extra.pageX + ', ' + extra.pageY;
+              cellsInfoStr += '</br></br> pageX,pageY : ' + extra.pageX + ',' + extra.pageY;
             }
 
-            $('#cells-info').text(cellsInfoStr);
+            $('#cells-info').html(cellsInfoStr);
           });
 
         $('#add-row').click(function () {
