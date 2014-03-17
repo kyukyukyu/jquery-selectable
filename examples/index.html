@@ -55,6 +55,7 @@
     <p id="cells-info"></p>
     <div>
         <button id="add-row">Add a new row</button>
+        <button id="add-column">Add a new column</button>
         <button id="update">Update selecTable</button>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -85,14 +86,30 @@
 
         $('#add-row').click(function () {
           var $tbody = $('#selectable').find('tbody');
-          var $row = $('<tr></tr>');
-          var $cell = $('<td>new</td>');
 
-          for (var i = 0; i < 3; ++i) {
-            $row.append($cell.clone());
+          var numberOfNewRow = $('tbody > tr').length;
+          var numberOfNewColumn = Number($('td:last').text().slice(-1))+1
+          var $row = $('<tr></tr>');
+          
+
+          for (var i = 0; i < numberOfNewColumn ; ++i) {
+            $row.append($('<td>'+numberOfNewRow+', '+i+'</td>'));
           }
 
           $tbody.append($row);
+        });
+
+        $('#add-column').click(function() {
+
+            var $trArr = $('tbody > tr');
+            var numberOfNewColumn = Number($('td:last').text().slice(-1))+1
+
+
+            for(var i = 0 ; i < $trArr.length ; ++i){
+                var $newColumn = $('<td>'+i+', '+numberOfNewColumn+'</td>');
+                $($trArr.get(i)).append($newColumn);
+            }
+
         });
 
         $('#update').click(function () {
