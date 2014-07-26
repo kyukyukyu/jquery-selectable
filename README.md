@@ -63,6 +63,33 @@ At the same time, all the selected cells (more specifically,
 specifically, `<td>` element) has also `.cursored` class. With these, you can 
 style the selected cells and the cursored cell.
 
+## How to Build
+
+If you want to build your own jQuery selecTable, it would be better to use
+[Grunt](http://gruntjs.com/), the JavaScript task runner. You can use [Grunt
+command line interface](https://github.com/gruntjs/grunt-cli) to make use of
+it. You can install it by running this command:
+
+```
+npm install -g grunt-cli
+```
+
+Run this command on your shell to get your own build.
+
+```
+grunt
+```
+
+Your own build will be available in `dist` directory.
+
+An useful Grunt task is available to 'watch' the changes of source files
+automatically, and run predefined Grunt tasks. Run this task by running
+this command on your shell:
+
+```
+grunt watch
+```
+
 ## License
 
 The MIT License (MIT) Copyright (c) 2014 Sanggyu Nam.
