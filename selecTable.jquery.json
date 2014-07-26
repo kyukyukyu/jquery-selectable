@@ -1,0 +1,41 @@
+{
+	"name": "jquery-selectable",
+	"title": "jQuery selecTable Plugin",
+	"description": "A simple jQuery plugin that makes table elements selectable with mouse or keyboard, just like tables of spreadsheet softwares.",
+	"keywords": [
+		"jquery",
+		"ui",
+		"plugins"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Sanggyu Nam",
+		"email": "pokeplus@gmail.com",
+		"url": "https://github.com/kyukyukyu"
+	},
+	"maintainers": [
+		{
+			"name": "Sanggyu Nam",
+			"email": "pokeplus@gmail.com",
+			"url": "https://github.com/kyukyukyu"
+		},
+        {
+            "name": "Sungmin Kim",
+            "email": "purpleblues568@gmail.com",
+            "url": "https://kr.linkedin.com/pub/성민-김/98/533/780/en"
+        }
+    ],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://zenorocha.mit-license.org/"
+		}
+	],
+	"bugs": "https://github.com/kyukyukyu/jquery-selectable/issues",
+	"homepage": "https://github.com/kyukyukyu/jquery-selectable",
+	"docs": "https://github.com/kyukyukyu/jquery-selectable#readme",
+	"download": "https://github.com/kyukyukyu/jquery-selectable/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.2.3"
+	}
+}

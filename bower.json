@@ -1,0 +1,17 @@
+{
+	"name": "jquery-selectable",
+	"version": "0.0.1",
+	"homepage": "https://github.com/kyukyukyu/jquery-selectable",
+	"authors": [
+		"Sanggyu Nam <pokeplus@gmail.com>"
+	],
+	"description": "A simple jQuery plugin that makes table elements selectable with mouse or keyboard, just like tables of spreadsheet softwares.",
+	"main": "src/jquery.selectable.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"jquery-plugin",
+		"jquery-selectable"
+	],
+	"license": "MIT"
+}
