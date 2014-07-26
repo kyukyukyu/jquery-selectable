@@ -20,7 +20,7 @@
   // minified (especially when both are regularly referenced in your plugin).
   
   // typeof strings
-  var STR = 'string', NUM = 'number';
+  var STR = "string", NUM = "number";
 
   // mouse button codes
   var MOUSE_LEFT = 1, MOUSE_MIDDLE = 2, MOUSE_RIGHT = 3;
@@ -34,15 +34,15 @@
       KEY_RARROW, KEY_DARROW];
 
   // data attribute names
-  var DATA_CELL = 'cell';
+  var DATA_CELL = "cell";
 
   // CSS class names
-  var CLASS_SELECTABLE = 'selecTable',
-      CLASS_SELECTED = 'selected',
-      CLASS_CURSORED = 'cursored';
+  var CLASS_SELECTABLE = "selecTable",
+      CLASS_SELECTED = "selected",
+      CLASS_CURSORED = "cursored";
 
   // Create the defaults once
-  var pluginName = 'selecTable',
+  var pluginName = "selecTable",
       document = window.document,
       defaults = {};
 
@@ -71,8 +71,8 @@
     this.clearSelectedCells();
 
     var $cellA = this.$cellA, $cellB = this.$cellB;
-    var arrA = $cellA.data(DATA_CELL).split(','),
-        arrB = $cellB.data(DATA_CELL).split(',');
+    var arrA = $cellA.data(DATA_CELL).split(","),
+        arrB = $cellB.data(DATA_CELL).split(",");
     var rowA = Number(arrA[0]), rowB = Number(arrB[0]);
     var colA = Number(arrA[1]), colB = Number(arrB[1]);
     var rowMin, rowMax, colMin, colMax;
@@ -97,7 +97,7 @@
 
     for (var r = rowMin; r <= rowMax; ++r) {
       var $row = $(this.$rows[r]);
-      var $cells = $row.find('td');
+      var $cells = $row.find("td");
 
       for (var c = colMin; c <= colMax; ++c) {
         var cell = $cells[c];
@@ -120,11 +120,11 @@
     }
 
     $(this.element).trigger(
-        'selectionupdate', extraObj);
+        "selectionupdate", extraObj);
   };
 
-  var selecTableAttributeName = 'plugin_' + pluginName;
-  var selecTableSelector = 'table';
+  var selecTableAttributeName = "plugin_" + pluginName;
+  var selecTableSelector = "table";
 
   var findSelecTableObjFromElem = function (element) {
     return $(element).data(selecTableAttributeName);
@@ -151,28 +151,28 @@
   var disableUserSelect = function (elem) {
     // original source: http://stackoverflow.com/a/5859238/1407838
     $(elem)
-    .attr('unselectable','on')
+    .attr("unselectable","on")
     .css({
-      '-moz-user-select': 'none',
-      '-o-user-select': 'none',
-      '-khtml-user-select': 'none',
-      '-webkit-user-select': 'none',
-      '-ms-user-select': 'none',
-      'user-select': 'none'
-     }).bind('selectstart', userSelectHandler);
+      "-moz-user-select": "none",
+      "-o-user-select": "none",
+      "-khtml-user-select": "none",
+      "-webkit-user-select": "none",
+      "-ms-user-select": "none",
+      "user-select": "none"
+     }).bind("selectstart", userSelectHandler);
   };
 
   var enableUserSelect = function (elem) {
     $(elem)
-    .attr('unselectable','')
+    .attr("unselectable","")
     .css({
-      '-moz-user-select': '',
-      '-o-user-select': '',
-      '-khtml-user-select': '',
-      '-webkit-user-select': '',
-      '-ms-user-select': '',
-      'user-select': ''
-     }).unbind('selectstart', userSelectHandler);
+      "-moz-user-select": "",
+      "-o-user-select": "",
+      "-khtml-user-select": "",
+      "-webkit-user-select": "",
+      "-ms-user-select": "",
+      "user-select": ""
+     }).unbind("selectstart", userSelectHandler);
   };
 
   Plugin.prototype.set$cellB = function ($newCellB) {
@@ -244,7 +244,7 @@
     }
 
     var $cellB = selecTableObj.$cellB;
-    var arrB = $cellB.data(DATA_CELL).split(',');
+    var arrB = $cellB.data(DATA_CELL).split(",");
     var r = Number(arrB[0]), c = Number(arrB[1]);
     var newR, newC;
 
@@ -280,7 +280,7 @@
       }
 
       var $newRow = $(selecTableObj.$rows[newR]);
-      var $newCellB = $($newRow.find('td')[newC]);
+      var $newCellB = $($newRow.find("td")[newC]);
 
       if (!selecTableObj.isShiftDown) {
         selecTableObj.$cellA = $newCellB;
@@ -309,30 +309,30 @@
     selecTableObj.isMouseDown = false;
     selecTableObj.$cellA = $();
     selecTableObj.clearSelectedCells();
-    $(selecTableObj.element).trigger('selectionupdate', {
+    $(selecTableObj.element).trigger("selectionupdate", {
       selectedCells: [],
       selectedCellsNo: []
     });
   };
 
   var setCellDataForTable = function (tableObj) {
-    var $rows = $(tableObj).find('tr');
+    var $rows = $(tableObj).find("tr");
 
     $rows.each(function (r) {
-      var $cells = $(this).find('td');
+      var $cells = $(this).find("td");
       $cells.each(function (c) {
-        $(this).data(DATA_CELL, r + ',' + c);
+        $(this).data(DATA_CELL, r + "," + c);
       });
     });
   };
 
   Plugin.prototype.update = function () {
     var $elem = $(this.element);
-    var $rows = $elem.find('tr');
-    var $cells = $elem.find('td');
+    var $rows = $elem.find("tr");
+    var $cells = $elem.find("td");
 
     this.numOfRows = $rows.length;
-    this.numOfCols = $($rows[0]).find('td').length;
+    this.numOfCols = $($rows[0]).find("td").length;
 
     this.$rows = $rows;
 
@@ -347,10 +347,10 @@
     this.selectedCells = [];
 
     $cells
-    .off('.selecTable')
-    .on('mousedown.selecTable', this.mousedown)
-    .on('mouseenter.selecTable', this.mouseenter)
-    .on('mouseup.selecTable', this.mouseup);
+    .off(".selecTable")
+    .on("mousedown.selecTable", this.mousedown)
+    .on("mouseenter.selecTable", this.mouseenter)
+    .on("mouseup.selecTable", this.mouseup);
   };
 
   Plugin.prototype.init = function () {
@@ -361,9 +361,9 @@
     var $elem = $(this.element);
 
     $elem
-    .on('keydown.selecTable', this.keydown)
-    .on('keyup.selecTable', this.keyup)
-    .on('blur.selecTable', this.blur);
+    .on("keydown.selecTable", this.keydown)
+    .on("keyup.selecTable", this.keyup)
+    .on("blur.selecTable", this.blur);
 
     disableUserSelect($elem);
 
@@ -383,14 +383,14 @@
     var ret;
 
     return this.each(function () {
-      if ($.data(this, 'plugin_' + pluginName)) {
+      if ($.data(this, "plugin_" + pluginName)) {
         switch (command) {
-        case 'update':
-          $.data(this, 'plugin_' + pluginName).update();
+        case "update":
+          $.data(this, "plugin_" + pluginName).update();
           break;
         }
       } else {
-        $.data(this, 'plugin_' + pluginName, new Plugin( this, options ));
+        $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
       }
     });
   };
