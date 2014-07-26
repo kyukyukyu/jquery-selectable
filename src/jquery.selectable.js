@@ -1,11 +1,3 @@
-/*
- *  Project: jQuery selecTable
- *  Description: A jQuery plugin that makes <table> elements selectable just 
- *               like tables of spreadsheets
- *  Author: Sanggyu Nam <pokeplus@gmail.com>
- *  License: MIT License
- */
-
 // the semi-colon before function invocation is a safety net against concatenated 
 // scripts and/or other plugins which may not be closed properly.
 ;(function ( $, window, undefined ) {
