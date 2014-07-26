@@ -20,10 +20,10 @@
   // minified (especially when both are regularly referenced in your plugin).
   
   // typeof strings
-  var STR = "string", NUM = "number";
+  var STR = "string";
 
   // mouse button codes
-  var MOUSE_LEFT = 1, MOUSE_MIDDLE = 2, MOUSE_RIGHT = 3;
+  var MOUSE_LEFT = 1;
 
   // keycodes
   var KEY_SHIFT = 16,
@@ -303,7 +303,7 @@
     enableUserSelect(document);
   };
 
-  Plugin.prototype.blur = function (e) {
+  Plugin.prototype.blur = function () {
     var selecTableObj = findSelecTableObjFromElem(this);
 
     selecTableObj.isMouseDown = false;
@@ -379,8 +379,6 @@
       command = options;
       options = undefined;
     }
-
-    var ret;
 
     return this.each(function () {
       if ($.data(this, "plugin_" + pluginName)) {
